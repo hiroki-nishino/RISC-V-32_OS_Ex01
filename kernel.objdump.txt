@@ -1,0 +1,31 @@
+
+kernel.elf:	file format elf32-littleriscv
+
+Disassembly of section .text:
+
+80000000 <_start>:
+80000000: 37 01 00 80  	lui	sp, 524288
+80000004: 13 61 c1 43  	ori	sp, sp, 1084
+
+80000008 <hoge>:
+80000008: 73 25 40 f1  	csrr	a0, mhartid
+8000000c: 93 02 05 00  	mv	t0, a0
+80000010: 63 84 02 02  	beqz	t0, 0x80000038 <cpu_id_zero>
+80000014: 13 03 10 00  	li	t1, 1
+80000018: 63 8e 62 00  	beq	t0, t1, 0x80000034 <cpu_id_one>
+8000001c: 13 03 20 00  	li	t1, 2
+80000020: 63 88 62 00  	beq	t0, t1, 0x80000030 <cpu_id_two>
+80000024: 13 03 30 00  	li	t1, 3
+80000028: 63 82 62 00  	beq	t0, t1, 0x8000002c <cpu_id_three>
+
+8000002c <cpu_id_three>:
+8000002c: 6f 00 00 00  	j	0x8000002c <cpu_id_three>
+
+80000030 <cpu_id_two>:
+80000030: 6f 00 00 00  	j	0x80000030 <cpu_id_two>
+
+80000034 <cpu_id_one>:
+80000034: 6f 00 00 00  	j	0x80000034 <cpu_id_one>
+
+80000038 <cpu_id_zero>:
+80000038: 6f 00 00 00  	j	0x80000038 <cpu_id_zero>
